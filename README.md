@@ -39,4 +39,3 @@ dlna-caffeinate install
 
 See the main project at [oochernyshev/dlna-caffeinate](https://github.com/oochernyshev/dlna-caffeinate) for license and source.
 
-```
