@@ -39,10 +39,10 @@ brew services list                    # Check if it's running
 
 ## 💡 How It Works
 
-* Watches for the `minidlnad` process
-* Keeps your Mac awake only while it is running
-* Uses the built-in `caffeinate` command
-* Stops keeping awake when DLNA activity ends
+* Monitors if **MiniDLNA is actively streaming** (i.e., serving content to a remote device).
+* Keeps your Mac awake **only while there is an active DLNA streaming session**.
+* Uses the built-in `caffeinate` command to prevent system sleep.
+* Automatically stops keeping the Mac awake when streaming ends or no clients are connected.
 
 ---
 
