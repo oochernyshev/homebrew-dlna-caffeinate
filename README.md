@@ -21,7 +21,7 @@ brew install dlna-caffeinate
 To install the background monitor:
 
 ```bash
-dlna-caffeinate install
+brew services start dlna-caffeinate
 ```
 
 ---
