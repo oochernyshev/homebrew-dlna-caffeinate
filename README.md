@@ -54,9 +54,3 @@ The background service writes logs to:
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-
-
-
-**That’s it!** This README now fits a single Homebrew-native open-source project.
-
-Let me know if you want a contributor section or anything else added!
