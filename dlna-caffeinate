@@ -1,0 +1,50 @@
+#!/bin/bash
+
+CHECK_INTERVAL=300  # 5 minutes
+CAFFEINATE_PID=0
+
+if [ -d "/opt/homebrew/var/log" ]; then
+  LOGFILE="/opt/homebrew/var/log/dlna-caffeinate.log"
+else
+  LOGFILE="/usr/local/var/log/dlna-caffeinate.log"
+fi
+
+start_caffeinate() {
+  if [[ $CAFFEINATE_PID -eq 0 ]] || ! ps -p $CAFFEINATE_PID > /dev/null; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting caffeinate..." >> "$LOGFILE"
+    /usr/bin/caffeinate -i &
+    CAFFEINATE_PID=$!
+  fi
+}
+
+stop_caffeinate() {
+  if [[ $CAFFEINATE_PID -ne 0 ]] && ps -p $CAFFEINATE_PID > /dev/null; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Stopping caffeinate..." >> "$LOGFILE"
+    kill $CAFFEINATE_PID 2>/dev/null
+    wait $CAFFEINATE_PID 2>/dev/null
+    CAFFEINATE_PID=0
+  fi
+}
+
+check_dlna_activity() {
+  if lsof -iTCP:8200 -sTCP:ESTABLISHED 2>/dev/null | grep -q minidlnad; then
+    start_caffeinate
+  else
+    stop_caffeinate
+  fi
+}
+
+cleanup() {
+  stop_caffeinate
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Exiting DLNA monitoring..." >> "$LOGFILE"
+  exit 0
+}
+
+trap cleanup SIGINT SIGTERM
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting DLNA monitoring..." >> "$LOGFILE"
+
+while true; do
+  check_dlna_activity
+  sleep "$CHECK_INTERVAL"
+done
