@@ -8,7 +8,7 @@ if [[ -z "$VERSION" ]]; then
   exit 1
 fi
 
-URL="https://github.com/oochernyshev/dlna-caffeinate/archive/refs/tags/${VERSION}.tar.gz"
+URL="https://github.com/oochernyshev/homebrew-dlna-caffeinate/archive/refs/tags/${VERSION}.tar.gz"
 FILE="dlna-caffeinate-${VERSION}.tar.gz"
 
 echo "Downloading $URL..."
