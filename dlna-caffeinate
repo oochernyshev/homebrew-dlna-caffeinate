@@ -9,11 +9,20 @@ else
   LOGFILE="/usr/local/var/log/dlna-caffeinate.log"
 fi
 
+simulate_activity() {
+  osascript -e 'tell application "System Events" to key code 0'
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Simulated keypress via osascript." >> "$LOGFILE"
+}
+
 start_caffeinate() {
   if [[ $CAFFEINATE_PID -eq 0 ]] || ! ps -p $CAFFEINATE_PID > /dev/null; then
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting caffeinate..." >> "$LOGFILE"
     /usr/bin/caffeinate -i &
     CAFFEINATE_PID=$!
+  fi
+
+  if [[ $CAFFEINATE_PID -ne 0 ]]; then
+    simulate_activity
   fi
 }
 
