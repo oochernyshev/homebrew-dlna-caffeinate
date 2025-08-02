@@ -1,9 +1,9 @@
 class DlnaCaffeinate < Formula
   desc "Keep Mac awake only while MiniDLNA is running"
   homepage "https://github.com/oochernyshev/homebrew-dlna-caffeinate"
-  url "https://github.com/oochernyshev/homebrew-dlna-caffeinate/archive/refs/tags/v1.0.6.tar.gz"
-  sha256 "b3eb4480a5f5d31e041944357ed74a598648c0025838ba9fff473884eed8eb9a"
-  version "1.0.6"
+  url "https://github.com/oochernyshev/homebrew-dlna-caffeinate/archive/refs/tags/v1.0.7.tar.gz"
+  sha256 "927095cb04e252aa15147c8421b3930fed457c5ede706cb584f0140c3480b34b"
+  version "1.0.7"
 
   def install
     bin.install "dlna-caffeinate"
